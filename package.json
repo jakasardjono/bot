@@ -4,15 +4,16 @@
   "description": "sinau bot",
   "main": "app.js",
   "scripts": {
-       "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "jek",
   "license": "ISC",
   "dependencies": {
     "botbuilder": "^3.2.3",
+    "fs": "0.0.1-security",
     "restify": "^4.1.1"
   },
-   "engines": {
+  "engines": {
     "node": "4.4.7"
   }
 }
