@@ -6,8 +6,8 @@ var fs =require('fs');
 // Bot Setup
 //=========================================================
  var https_options = {
-        key: fs.readFileSync('./server.key'), //on current folder
-        certificate: fs.readFileSync('./server.csr')
+        key: fs.readFileSync('./ca.key2'), //on current folder
+        certificate: fs.readFileSync('./ca.cer')
     };
 
     
