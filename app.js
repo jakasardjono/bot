@@ -43,21 +43,15 @@ intents.matches(/^njaluk link/i, [
     },
     function (session, results) {
         var url = 'http://www.jpnn.com/index.php?mib=tag&keyword=mesum';
-        var linkNum = results.response;
-        if(linkNum==null||linkNum=='')
-            {linkNum=1;}else
-            {
-                linkNum= parseInt(linkNum, 10);
-                if(linkNum>10) {linkNum=10;}
-            }
         request(url, function(err, resp, body){
-            $ = cheerio.load(body);
-            links = $('a[href*="read"]') //jquery get all hyperlinks
-            var exlinks=[];
-            for (i = 0; i < linkNum; i++) {
-                exlinks.push($(links[i].text() + ':\n  ' + $(links[i])).attr('href'));
-            }
-            session.send(exlinks.toString());
+              $ = cheerio.load(body);
+              links = $('a[href*="read"]') //jquery get all hyperlinks
+              var number = 1 + Math.floor(Math.random() * 6);
+              $(links).each(function(i, link){
+                  if(i==number){
+                    session.send($(link).text() + ':\n  ' + $(link).attr('href'));
+                  }
+              });
         });
      }
 ]);
@@ -87,10 +81,10 @@ bot.dialog('/profile', [
 
 bot.dialog('/jpnn', [
     function (session) {
-        builder.Prompts.text(session, 'piro lik?');
+        builder.Prompts.text(session, 'yakin lik?');
     },
     function (session, results) {
-        session.userData.url = results.response;
+        session.userData.linkNum = results.response;
         session.endDialog();
     }
 ]);
